@@ -139,11 +139,21 @@ function animateConfetti() {
 
     requestAnimationFrame(animateConfetti);
 }
-/* auto play music after first tap (mobile safe) */
 const music = document.getElementById("bgMusic");
 
 if (music) {
-    document.addEventListener("click", () => {
-        music.play();
-    }, { once: true });
+
+    // try autoplay immediately
+    window.addEventListener("load", () => {
+        const playPromise = music.play();
+
+        // if autoplay blocked (iPhone), play on first touch
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {
+                document.addEventListener("touchstart", () => music.play(), { once: true });
+                document.addEventListener("click", () => music.play(), { once: true });
+            });
+        }
+    });
 }
+
