@@ -1,0 +1,307 @@
+/* RESET */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* BODY */
+body {
+    font-family: "Georgia", serif;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    min-height: 100vh;
+}
+
+/* CENTERING */
+.center,
+.letter-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* =====================
+   ENVELOPE
+===================== */
+
+.envelope {
+    position: relative;
+    width: min(70vw, 320px);
+    height: min(45vw, 210px);
+    background: #ff9bb3;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+}
+
+.envelope:active {
+    transform: scale(0.95);
+}
+
+/* FLAP */
+.flap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ff6f91;
+    clip-path: polygon(0 0, 50% 60%, 100% 0);
+    transform-origin: top;
+    transition: transform 0.6s ease;
+}
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+}
+
+/* TEXT */
+.letter-preview {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: clamp(14px, 4vw, 18px);
+    font-weight: bold;
+    color: white;
+}
+
+/* =====================
+   LETTER PAGE
+===================== */
+
+.letter-container {
+    background: white;
+    width: 100%;
+    max-width: 600px;
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    animation: fadeIn 0.8s ease;
+}
+
+/* iPad looks nicer with more space */
+@media (min-width: 768px) {
+    .letter-container {
+        padding: 50px;
+    }
+}
+
+h1 {
+    color: #ff4d6d;
+    margin-bottom: 18px;
+    font-size: clamp(22px, 5vw, 30px);
+}
+
+p {
+    margin-bottom: 14px;
+    line-height: 1.6;
+    font-size: clamp(15px, 4vw, 18px);
+}
+
+/* BUTTON */
+button {
+    margin-top: 18px;
+    padding: 12px 20px;
+    width: 100%;
+    font-size: 16px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #ff4d6d;
+    color: white;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* =====================
+   PHOTO SECTION
+===================== */
+
+.photo-section {
+    margin: 25px 0;
+    text-align: center;
+}
+
+.photo-section h2 {
+    margin-bottom: 12px;
+    font-size: clamp(18px, 4vw, 22px);
+    color: #ff4d6d;
+}
+
+/* responsive grid */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 12px;
+}
+
+/* polaroid style */
+.photo {
+    background: white;
+    padding: 8px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    transition: transform 0.25s ease;
+}
+
+.photo img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* cute hover/tap */
+.photo:hover {
+    transform: scale(1.05) rotate(-2deg);
+}
+/* =====================
+   VALENTINE CARD PAGE
+===================== */
+
+.valentine-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+}
+
+.card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    animation: fadeIn 0.8s ease;
+}
+
+.card h1 {
+    font-size: clamp(22px, 6vw, 30px);
+    margin-bottom: 30px;
+    color: #ff4d6d;
+}
+
+/* BUTTON ROW */
+.buttons {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+}
+
+/* YES */
+.yes-btn {
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 14px 26px;
+    font-size: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+/* NO */
+.no-btn {
+    background: #ccc;
+    border: none;
+    padding: 14px 26px;
+    font-size: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+}
+
+/* POPUP MESSAGE (TOP BANNER) */
+.popup {
+    position: fixed;
+    top: 25px;              /* moved to top */
+    left: 50%;
+    transform: translateX(-50%);
+
+    background: #ff4d6d;
+    color: white;
+
+    padding: 14px 24px;
+    border-radius: 25px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* little pop animation */
+.popup.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(6px);
+}
+
+/* =====================
+   CONFETTI CANVAS
+===================== */
+
+#confettiCanvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+}
+/* =====================
+   COLLAGE BACKGROUND
+===================== */
+
+.collage-bg {
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    background-image: url("images/collage.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* dark overlay so text is readable */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(3px);
+    z-index: 0;
+}
+
+/* letter floats above background */
+.letter-container {
+    position: relative;
+    z-index: 2;
+
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+}
